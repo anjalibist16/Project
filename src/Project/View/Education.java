@@ -1,8 +1,7 @@
 package Project.View;
 
 import java.awt.Toolkit;
-import java.net.URL;
-
+import src.soothesphere.View.MainPage;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -50,6 +49,7 @@ public class Education extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -255,6 +255,14 @@ public class Education extends javax.swing.JFrame {
         });
         getContentPane().add(jButton18, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
 
+        jButton19.setText("Back");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
+
         jLabel1.setBackground(new java.awt.Color(153, 191, 217));
         jLabel1.setOpaque(true);
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -415,6 +423,14 @@ public class Education extends javax.swing.JFrame {
         dispose(); // close Education after opening Education4
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        // TODO add your handling code here:
+        MainPage main = new MainPage();
+        main.show();
+        
+        dispose();
+    }//GEN-LAST:event_jButton19ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -443,8 +459,10 @@ public class Education extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Education().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Education().setVisible(true);
+            }
         });
     }
 
@@ -459,6 +477,7 @@ public class Education extends javax.swing.JFrame {
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -471,15 +490,7 @@ public class Education extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
-private void setIconImage() {
-    URL imageUrl = getClass().getResource("/Project/View/resources/logo.png");
-    if (imageUrl != null) {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(imageUrl));
-    } else {
-        System.err.println("Image not found: /Project/View/resources/logo.png");
+    private void setIconImage() {
+       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
     }
-}
-
-
-
 }

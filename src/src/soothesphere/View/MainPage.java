@@ -8,9 +8,7 @@ import Project.View.Education;
 import Project1.View.ListOfMusic;
 import Project2.View.MeditationScriptss;
 import Project3.View.BreathingTechniques;
-import soothesphere.listofcontacts;
 import soothesphere.yogaandexercises;
-
 
 
 
@@ -41,16 +39,15 @@ public class MainPage extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
         jLabel2 = new javax.swing.JLabel();
-        SettingsButton = new javax.swing.JButton();
         ContactButton = new javax.swing.JButton();
-        ProfileButton = new javax.swing.JButton();
-        NotificationButton = new javax.swing.JButton();
+        feedbackButton = new javax.swing.JButton();
         BreathingButton = new javax.swing.JButton();
         AnxietyButton = new javax.swing.JButton();
         MeditationButton = new javax.swing.JButton();
         YogaButton = new javax.swing.JButton();
         ExerciseButton = new javax.swing.JButton();
         MusicButton = new javax.swing.JButton();
+        aboutusButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -62,15 +59,12 @@ public class MainPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SettingsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/SootheSphere.png"))); // NOI18N
-        SettingsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SettingsButtonActionPerformed(evt);
+        ContactButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/Emergency_Phone_Numbers-removebg-preview.png"))); // NOI18N
+        ContactButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ContactButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(SettingsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 30, -1));
-
-        ContactButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/Emergency_Phone_Numbers-removebg-preview.png"))); // NOI18N
         ContactButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ContactButtonActionPerformed(evt);
@@ -78,16 +72,18 @@ public class MainPage extends javax.swing.JFrame {
         });
         getContentPane().add(ContactButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 32, -1));
 
-        ProfileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/Profile Icon Silhouette PNG Transparent, Avatar Icon Profile Icon Member Login Vector Isolated, Login Icons, Profile Icons, Avatar Icons PNG Image For Free Download.jpg"))); // NOI18N
-        ProfileButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ProfileButtonActionPerformed(evt);
+        feedbackButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/feedback.png"))); // NOI18N
+        feedbackButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                feedbackButtonMouseClicked(evt);
             }
         });
-        getContentPane().add(ProfileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, 32, 31));
-
-        NotificationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/SootheSphere (10).png"))); // NOI18N
-        getContentPane().add(NotificationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 32, 31));
+        feedbackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                feedbackButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(feedbackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, 32, 31));
 
         BreathingButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/SootheSphere (6).png"))); // NOI18N
         BreathingButton.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +110,11 @@ public class MainPage extends javax.swing.JFrame {
         getContentPane().add(MeditationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 56, 54));
 
         YogaButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/SootheSphere (4).png"))); // NOI18N
+        YogaButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                YogaButtonMouseClicked(evt);
+            }
+        });
         YogaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 YogaButtonActionPerformed(evt);
@@ -136,6 +137,19 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(MusicButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 55, 54));
+
+        aboutusButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/aboutus.png"))); // NOI18N
+        aboutusButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aboutusButton1MouseClicked(evt);
+            }
+        });
+        aboutusButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutusButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(aboutusButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 32, 31));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/SootheSphere (3).png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -166,10 +180,6 @@ public class MainPage extends javax.swing.JFrame {
         
         dispose(); // close MainPage after opening listofcontacts
     }//GEN-LAST:event_ContactButtonActionPerformed
-
-    private void SettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SettingsButtonActionPerformed
 
     private void AnxietyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnxietyButtonActionPerformed
         // TODO add your handling code here:
@@ -207,9 +217,42 @@ public class MainPage extends javax.swing.JFrame {
         dispose(); // close MainPage after opening Education
     }//GEN-LAST:event_ExerciseButtonActionPerformed
 
-    private void ProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProfileButtonActionPerformed
+    private void ContactButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContactButtonMouseClicked
+        listofcontacts listofcontacts = new listofcontacts();
+   listofcontacts.setVisible(true);
+    this.setVisible(false);
+    }//GEN-LAST:event_ContactButtonMouseClicked
+
+    private void feedbackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feedbackButtonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_ProfileButtonActionPerformed
+    }//GEN-LAST:event_feedbackButtonMouseClicked
+
+    private void YogaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_YogaButtonMouseClicked
+       yogaandexercises yogaandexercises = new yogaandexercises();
+    yogaandexercises.setVisible(true);
+    this.setVisible(false);
+    }//GEN-LAST:event_YogaButtonMouseClicked
+
+    private void feedbackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feedbackButtonActionPerformed
+        // TODO add your handling code here:
+        feedback ab = new feedback();
+        ab.show();
+        
+        
+        dispose();
+    }//GEN-LAST:event_feedbackButtonActionPerformed
+
+    private void aboutusButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutusButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aboutusButton1MouseClicked
+
+    private void aboutusButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutusButton1ActionPerformed
+        // TODO add your handling code here:
+        Aboutus ab = new Aboutus();
+        ab.show();
+        
+        dispose();
+    }//GEN-LAST:event_aboutusButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,10 +297,9 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JButton ExerciseButton;
     private javax.swing.JButton MeditationButton;
     private javax.swing.JButton MusicButton;
-    private javax.swing.JButton NotificationButton;
-    private javax.swing.JButton ProfileButton;
-    private javax.swing.JButton SettingsButton;
     private javax.swing.JButton YogaButton;
+    private javax.swing.JButton aboutusButton1;
+    private javax.swing.JButton feedbackButton;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

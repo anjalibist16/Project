@@ -4,8 +4,11 @@
  */
 package src.soothesphere.View;
 
-
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -18,9 +21,50 @@ public class ResetPassword extends javax.swing.JFrame {
      */
     public ResetPassword() {
         initComponents();
-  
+
     }
-  
+
+    // Method to validate the password
+    private boolean isValidPassword(String password) {
+        // Check for at least one capital letter and one number
+        return password.matches("^(?=.*[A-Z])(?=.*\\d).+$");
+    }
+
+    // Method to check if the email exists and change the password
+    private boolean changePassword(String email, String newPassword) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            // Check if the email exists
+            String query = "SELECT password FROM users WHERE email = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                // Email found, check if the new password is different from the current password
+                String currentPassword = rs.getString("password");
+                if (newPassword.equals(currentPassword)) {
+                    JOptionPane.showMessageDialog(null, "New password cannot be the same as the current password");
+                    return false;
+                }
+
+                // Update the password
+                String updateQuery = "UPDATE users SET password = ? WHERE email = ?";
+                PreparedStatement updatePs = conn.prepareStatement(updateQuery);
+                updatePs.setString(1, newPassword);
+                updatePs.setString(2, email);
+                updatePs.executeUpdate();
+
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Email not found");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Database error");
+            return false;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,31 +134,35 @@ public class ResetPassword extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordActionPerformed
 
+
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         // TODO add your handling code here:
         String email = Email.getText();
         String password = Password.getText();
         String confirm = Confirm.getText();
 
-        if(email.equals("")){
+        if (email.equals("")) {
             JOptionPane.showMessageDialog(this, "email is empty");
-        }else if (password.equals("")){
+        } else if (password.equals("")) {
             JOptionPane.showMessageDialog(this, "password is empty");
-        }else if (confirm.equals("")){
-            JOptionPane.showMessageDialog(this, "confirm is empty");
-        }else if (!password.equals(confirm)){
+        } else if (confirm.equals("")) {
+            JOptionPane.showMessageDialog(this, "confirm password is empty");
+        } else if (!password.equals(confirm)) {
             JOptionPane.showMessageDialog(this, "Password mismatch");
-        }else{
-              int response = JOptionPane.showConfirmDialog(this, "Your password has been changed", "Success", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-            // If the user clicks "OK", hide the current window and open the new page
-           if (response == JOptionPane.OK_OPTION) {
-             this.setVisible(false); // Hide the current window
-             LogInPage lp = new LogInPage();
-             lp.setVisible(true);
-           }
+        } else if (!isValidPassword(password)) {
+            JOptionPane.showMessageDialog(this, "Password must contain at least one capital letter and one number");
+        } else {
+            if (changePassword(email, password)) {
+                int response = JOptionPane.showConfirmDialog(this, "Your password has been changed", "Success", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                if (response == JOptionPane.OK_OPTION) {
+                    this.setVisible(false); // Hide the current window
+                    LogInPage lp = new LogInPage();
+                    lp.setVisible(true);
+                }
+            }
         }
-        
-        
+
+
     }//GEN-LAST:event_resetActionPerformed
 
     private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed

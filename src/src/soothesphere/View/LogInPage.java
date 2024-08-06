@@ -6,7 +6,10 @@ package src.soothesphere.View;
 
 
 import javax.swing.JOptionPane;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author User
@@ -139,22 +142,41 @@ public class LogInPage extends javax.swing.JFrame {
         Sp.setVisible(true);
     }//GEN-LAST:event_SignUp1ButtonActionPerformed
 
+    private boolean checkCredentials(String username, String password) {
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next(); // Returns true if a matching record is found
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
     private void LogIn1ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogIn1ButtonActionPerformed
         // TODO add your handling code here:
         String username = Username.getText();
-        String password = Password.getText();
+        String password = new String(Password.getPassword());
 
-        if(username.equals("")){
-            JOptionPane.showMessageDialog(this, "username is empty");
-        }else if (password.equals("")){
-            JOptionPane.showMessageDialog(this, "password is empty");
-        }else{
-             int response = JOptionPane.showConfirmDialog(this, "Login successful", "Success", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-             if (response == JOptionPane.OK_OPTION) {
+        if (username.equals("")) {
+            JOptionPane.showMessageDialog(this, "Username is empty");
+        } else if (password.equals("")) {
+            JOptionPane.showMessageDialog(this, "Password is empty");
+        } else {
+            if (checkCredentials(username, password)) {
+                JOptionPane.showMessageDialog(this, "Login successful", "Success", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
-                MainPage Mp = new MainPage();
-                Mp.setVisible(true);
-             }
+                MainPage mp = new MainPage();
+                mp.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_LogIn1ButtonActionPerformed

@@ -1,7 +1,6 @@
 package Project.View;
 
-import java.net.URL;
-import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -151,8 +150,10 @@ public class Education3 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Education3().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Education3().setVisible(true);
+            }
         });
     }
 
@@ -171,13 +172,6 @@ public class Education3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 
-private void setIconImage() {
-    URL imageUrl = getClass().getResource("/logo.png"); // Assuming logo.png is in src/main/resources
-    if (imageUrl != null) {
-        ImageIcon icon = new ImageIcon(imageUrl);
-        setIconImage(icon.getImage());
-    } else {
-        System.err.println("Resource not found: /logo.png");
-    }
-}
+    private void setIconImage() {
+setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));    }
 }

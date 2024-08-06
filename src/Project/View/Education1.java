@@ -1,7 +1,6 @@
 package Project.View;
 
 import java.awt.Toolkit;
-import java.net.URL;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -161,8 +160,10 @@ public class Education1 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new Education1().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Education1().setVisible(true);
+            }
         });
     }
 
@@ -185,13 +186,7 @@ public class Education1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 
-   private void setIconImage() {
-    URL imageUrl = getClass().getResource("/Project/View/resources/logo.png");
-    if (imageUrl != null) {
-        setIconImage(Toolkit.getDefaultToolkit().getImage(imageUrl));
-    } else {
-        System.err.println("Image not found: /Project/View/resources/logo.png");
+    private void setIconImage() {
+       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
     }
-}
-
 }

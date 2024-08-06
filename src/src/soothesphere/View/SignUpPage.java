@@ -5,6 +5,11 @@
 package src.soothesphere.View;
 
 import javax.swing.JOptionPane;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import DatabaseConnection.DatabaseConnection;
+import java.sql.*;
+import java.sql.SQLException;
 
 /**
  *
@@ -54,7 +59,7 @@ public class SignUpPage extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 144, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jLabel2.setText("Full name");
+        jLabel2.setText("Username");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 76, 60, -1));
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
@@ -113,33 +118,95 @@ public class SignUpPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+      
+    private boolean isEmailValid(String email) {
+        return email.matches("^[a-zA-Z0-9._%+-]+@gmail\\.com$");
+    }
+
+    // Method to check if the password contains at least one number and one uppercase letter
+    private boolean isPasswordValid(String password) {
+        boolean hasUpperCase = false;
+        boolean hasDigit = false;
+        
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            }
+            if (hasUpperCase && hasDigit) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+       // Method to check for duplicate username or email in the database
+    private boolean isUserExist(String name, String email) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String query = "SELECT * FROM users WHERE username = ? OR email = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, name);
+            stmt.setString(2, email);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next(); // Return true if any result is found
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return true; // Assume user exists if there's an error
+        }
+    }
+    
     private void SignUp2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUp2ButtonActionPerformed
         // TODO add your handling code here:
-        String Name = FullName.getText();
-        String email = Email.getText();
-        String password = Password1.getText();
-        String confirm = Confirm.getText();
-        
-        if(Name.equals("")){
-            JOptionPane.showMessageDialog(this, "name is empty");
-        }else if(email.equals("")){
-            JOptionPane.showMessageDialog(this, "email is empty");
-        }else if (password.equals("")){
-            JOptionPane.showMessageDialog(this, "password is empty");
-        }else if (confirm.equals("")){
-            JOptionPane.showMessageDialog(this, "confirm is empty");
-        }else if (!password.equals(confirm)){
-            JOptionPane.showMessageDialog(this, "Password mismatch");
-        }else{
-             int response = JOptionPane.showConfirmDialog(this, "Registration Done", "Success", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
-             if (response == JOptionPane.OK_OPTION) {
-//                this.dispose();
-//                LogInPage Lp = new LogInPage();
-//                Lp.setVisible(true);
-             }
-         }
-    }//GEN-LAST:event_SignUp2ButtonActionPerformed
+        String name = FullName.getText().trim();
+        String email = Email.getText().trim();
+        String password = new String(Password1.getPassword());
+        String confirm = new String(Confirm.getPassword());
 
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Name is empty");
+        } else if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Email is empty");
+        } else if (!isEmailValid(email)) {
+            JOptionPane.showMessageDialog(this, "Email must be a valid Gmail address");
+        } else if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Password is empty");
+        } else if (!isPasswordValid(password)) {
+            JOptionPane.showMessageDialog(this, "Password must contain at least one number and one uppercase letter");
+        } else if (confirm.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Confirm is empty");
+        } else if (!password.equals(confirm)) {
+            JOptionPane.showMessageDialog(this, "Password mismatch");
+        } else if (!jCheckBox1.isSelected()) {
+            JOptionPane.showMessageDialog(this, "You must accept the terms and conditions");
+        } else if (isUserExist(name, email)) {
+            JOptionPane.showMessageDialog(this, "Username or email already exists", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (registerUser(name, email, password)) {
+                JOptionPane.showMessageDialog(this, "Registration Done", "Success", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                new LogInPage().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Registration Failed", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_SignUp2ButtonActionPerformed
+    private boolean registerUser(String name, String email, String password) {
+        String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, password);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
     private void LogIn3ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogIn3ButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();

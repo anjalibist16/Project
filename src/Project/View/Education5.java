@@ -4,8 +4,7 @@
  */
 package Project.View;
 
-import java.net.URL;
-import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 /**
  *
@@ -155,15 +154,6 @@ public class Education5 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
      private void setIconImage() {
-    URL imageUrl = getClass().getResource("/logo.png");
-    System.out.println("Resource URL: " + imageUrl); // Debugging output
-
-    if (imageUrl != null) {
-        ImageIcon icon = new ImageIcon(imageUrl);
-        setIconImage(icon.getImage());
-    } else {
-        System.err.println("Resource not found: /logo.png");
+       setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("logo.png")));
     }
-}
-
 }
