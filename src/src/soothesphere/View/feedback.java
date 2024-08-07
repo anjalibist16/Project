@@ -4,6 +4,7 @@
  */
 package src.soothesphere.View;
 
+import database.DatabaseConnection;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
