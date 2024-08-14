@@ -48,6 +48,7 @@ public class MainPage extends javax.swing.JFrame {
         ExerciseButton = new javax.swing.JButton();
         MusicButton = new javax.swing.JButton();
         aboutusButton1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -150,6 +151,16 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(aboutusButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 32, 31));
+
+        jButton1.setBackground(new java.awt.Color(255, 0, 51));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Delete Account");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/SootheSphere (3).png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -254,6 +265,14 @@ public class MainPage extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_aboutusButton1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        DeleteAccount da = new DeleteAccount();
+        da.show();
+        
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -300,6 +319,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JButton YogaButton;
     private javax.swing.JButton aboutusButton1;
     private javax.swing.JButton feedbackButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

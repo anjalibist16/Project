@@ -83,6 +83,8 @@ public class ResetPassword extends javax.swing.JFrame {
         Password = new javax.swing.JPasswordField();
         Email = new javax.swing.JTextField();
         reset = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,6 +126,18 @@ public class ResetPassword extends javax.swing.JFrame {
             }
         });
         getContentPane().add(reset, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 223, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabel6.setText("Reset Password");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/SootheSphere (14).png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
@@ -170,6 +184,14 @@ public class ResetPassword extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ConfirmActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        LogInPage lp = new LogInPage();
+        lp.show();
+        
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,10 +231,12 @@ public class ResetPassword extends javax.swing.JFrame {
     private javax.swing.JPasswordField Confirm;
     private javax.swing.JTextField Email;
     private javax.swing.JPasswordField Password;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables
 }
